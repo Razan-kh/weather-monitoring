@@ -31,4 +31,12 @@ public class WeatherPublisher
             bot.Notify(weatherData);
         }
     }
+
+    public void SubscribeBots(List<IWeatherBot> bots)
+    {
+        foreach (var bot in bots)
+        {
+            SubscribeBot(bot);
+        }
+    }
 }
