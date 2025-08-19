@@ -1,6 +1,6 @@
 ﻿using weather_monitoring.IWeatherBots;
 
-public class MainClass
+public class Program
 {
     public static void Main()
     {
