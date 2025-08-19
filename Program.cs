@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace weather_monitoring;
+
+public class MainClass
+{
+    public static void Main()
+    {
+
+    }
+}
