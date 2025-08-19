@@ -13,9 +13,10 @@ public class WeatherPublisher
         _parsingInput = parsingInput;
     }
 
-    public void Subscribe(IWeatherBot bot) => _bots.Add(bot);
+    public void SubscribeBot(IWeatherBot bot) => _bots.Add(bot);
 
-    public void Unsubscribe(IWeatherBot bot) => _bots.Remove(bot);
+    public void UnsubscribeBot
+    (IWeatherBot bot) => _bots.Remove(bot);
 
     public void ParseInput(string input)
     {
