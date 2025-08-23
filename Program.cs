@@ -1,5 +1,6 @@
 using WeatherMonitoring.Parsers;
 using WeatherMonitoring.IWeatherBots;
+using WeatherMonitoring.Parsers.Exceptions;
 
 namespace WeatherMonitoring;
 
@@ -15,13 +16,33 @@ public class Program
             var inputWeather = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(inputWeather))
                 continue;
-            InputType inputType= InputTypeDetector.Detect(inputWeather);
+            InputType inputType;
+            try
+            {
+                inputType = InputTypeDetector.Detect(inputWeather);
+            }
+            catch (Exception exception)
+            {
+                System.Console.WriteLine(exception.Message);
+                continue;
+            }
             var inputParser = ParserFactory.CreateParser(inputType);
             var weatherPublisher = new WeatherPublisher(inputParser);
             var configs = ConfigLoader.Load(ConfigFileName);
             var bots = BotFactory.CreateBots(configs);
             weatherPublisher.SubscribeBots(bots);
-            weatherPublisher.ParseInput(inputWeather);
+            try
+            {
+                weatherPublisher.ParseInput(inputWeather);
+            }
+            catch (ParsingException ex)
+            {
+                Console.WriteLine($"Parsing failed: {ex.Message}");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"{exception.Message}");
+            }
         }
     }
 }
