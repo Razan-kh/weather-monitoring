@@ -1,5 +1,5 @@
 using WeatherMonitoring.IWeatherBots;
-using WeatherMonitoring.ParsingInput;
+using WeatherMonitoring.Parsers;
 
 namespace WeatherMonitoring;
 
