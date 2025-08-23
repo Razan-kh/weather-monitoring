@@ -1,4 +1,4 @@
-namespace weather_monitoring.ParsingInput;
+namespace WeatherMonitoring.Parsers;
 
 public interface IParsingInput
 {
