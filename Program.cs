@@ -1,10 +1,9 @@
-using weather_monitoring.IWeatherBots;
-using weather_monitoring.ParsingInput;
-
-namespace weather_monitoring;
+namespace WeatherMonitoring.IWeatherBots;
 
 public class Program
 {
+    private const string ConfigFileName = "Configuration.json";
+    
     public static void Main()
     {
         while (true)

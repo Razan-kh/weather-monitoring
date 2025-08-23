@@ -1,7 +1,7 @@
-using weather_monitoring.IWeatherBots;
-using weather_monitoring.ParsingInput;
+using WeatherMonitoring.IWeatherBots;
+using WeatherMonitoring.ParsingInput;
 
-namespace weather_monitoring;
+namespace WeatherMonitoring;
 
 public class WeatherPublisher
 {

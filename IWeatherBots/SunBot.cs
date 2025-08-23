@@ -1,4 +1,6 @@
-namespace weather_monitoring.IWeatherBots;
+using WeatherMonitoring.IWeatherBots.BotConfigurations;
+
+namespace WeatherMonitoring.IWeatherBots;
 
 public class SunBot : IWeatherBot
 {
@@ -6,11 +8,11 @@ public class SunBot : IWeatherBot
     public bool Enabled { get; init; }
     public double TemperatureThreshold { get; init; }
 
-    public SunBot(BotConfig botConfig)
+    public SunBot(TemperatureConfiguration botConfiguration)
     {
-        Message = botConfig.Message;
-        Enabled = botConfig.Enabled;
-        TemperatureThreshold = (double)botConfig.TemperatureThreshold!;
+        Message = botConfiguration.Message;
+        Enabled = botConfiguration.Enabled;
+        TemperatureThreshold = botConfiguration.Treshold;
     }
 
     public void Activate() => Console.WriteLine(Message);

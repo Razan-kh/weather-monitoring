@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace weather_monitoring.ParsingInput;
+namespace WeatherMonitoring.ParsingInput;
 
 public class XMLParser : IParsingInput
 {

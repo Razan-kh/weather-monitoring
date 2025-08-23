@@ -1,4 +1,4 @@
-namespace weather_monitoring.IWeatherBots;
+namespace WeatherMonitoring.IWeatherBots;
 
 public interface IWeatherBot
 {

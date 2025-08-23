@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace weather_monitoring.ParsingInput;
+namespace WeatherMonitoring.ParsingInput;
 
 public class JsonParser : IParsingInput
 {
