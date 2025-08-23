@@ -1,4 +1,4 @@
-namespace weather_monitoring;
+namespace WeatherMonitoring;
 
 public class WeatherData
 {

@@ -1,10 +1,12 @@
-﻿using weather_monitoring.IWeatherBots;
+﻿namespace WeatherMonitoring.IWeatherBots;
 
 public class Program
 {
+    private const string ConfigFileName = "Configuration.json";
+    
     public static void Main()
     {
-        var configs = ConfigLoader.Load("Configuration.json");
+        var configs = ConfigLoader.Load(ConfigFileName);
         var bots = BotFactory.CreateBots(configs);
     }
 }

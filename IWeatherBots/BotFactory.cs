@@ -1,35 +1,25 @@
-namespace weather_monitoring.IWeatherBots;
+using WeatherMonitoring.IWeatherBots.BotConfigurations;
+
+namespace WeatherMonitoring.IWeatherBots;
 
 public static class BotFactory
 {
-    public static List<IWeatherBot> CreateBots(Dictionary<string, BotConfig> configs)
+    public static List<IWeatherBot> CreateBots(Dictionary<BotType, BotConfiguration> configs)
     {
-        var bots = new List<IWeatherBot>();
-
-        foreach (var kvp in configs)
-        {
-            var botName = kvp.Key;
-            var config = kvp.Value;
-
-            if (!config.Enabled)
-            {
-                continue;
-            }
-            var bot = CreateBot(botName, config);
-            bots.Add(bot);
-        }
-        return bots;
+        return configs
+        .Where(kvp => kvp.Value.Enabled)
+        .Select(kvp => CreateBot(kvp.Key, kvp.Value))
+        .ToList();                                     
     }
 
-    public static IWeatherBot CreateBot(string botName, BotConfig config)
+    public static IWeatherBot CreateBot(BotType botName, BotConfiguration config)
     {
-        IWeatherBot bot = botName switch
+        return botName switch
         {
-            "RainBot" => new RainBot(config),
-            "SunBot" => new SunBot(config),
-            "SnowBot" => new SnowBot(config),
-            _ => throw new Exception($"Unknown bot type: {botName}"),
+            BotType.RainBot => new RainBot((HumidityConfiguration)config),
+            BotType.SunBot  => new SunBot((TemperatureConfiguration)config),
+            BotType.SnowBot => new SnowBot((TemperatureConfiguration)config),
+            _ => throw new ArgumentOutOfRangeException(nameof(botName), botName, "Unsupported bot type")
         };
-        return bot;
     }
 }
