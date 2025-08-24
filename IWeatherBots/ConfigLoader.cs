@@ -9,19 +9,15 @@ public static class ConfigLoader
     {
         var json = File.ReadAllText(path);
         using var doc = JsonDocument.Parse(json);
-
-        var result = new Dictionary<BotType, BotConfiguration>();
-
-        foreach (var property in doc.RootElement.EnumerateObject())
-        {
-            if (!Enum.TryParse<BotType>(property.Name, ignoreCase: true, out var botType))
-            {
-                throw new InvalidOperationException($"Unknown bot type in configuration: {property.Name}");
-            }
-            result[botType] = DeserializeBot(property);
-        }
-
-        return result;
+        
+        return doc.RootElement
+        .EnumerateObject()
+        .ToDictionary(
+            property => Enum.TryParse<BotType>(property.Name, ignoreCase: true, out var botType)
+                ? botType
+                : throw new InvalidOperationException($"Unknown bot type in configuration: {property.Name}"),
+            property => DeserializeBot(property)
+        );
     }
 
     private static BotConfiguration DeserializeBot(JsonProperty property)
