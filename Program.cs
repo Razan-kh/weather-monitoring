@@ -10,39 +10,65 @@ public class Program
 
     public static void Main()
     {
+        var configs = ConfigLoader.Load(ConfigFileName);
+        var bots = BotFactory.CreateBots(configs);
+
         while (true)
         {
-            Console.WriteLine("Enter weather data:");
-            var inputWeather = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(inputWeather))
-                continue;
-            InputType inputType;
-            try
+            var inputWeather = ReadWeatherInput();
+            if (inputWeather is null)
             {
-                inputType = InputTypeDetector.Detect(inputWeather);
-            }
-            catch (Exception exception)
-            {
-                System.Console.WriteLine(exception.Message);
                 continue;
             }
+
+            if (!TryDetectInputType(inputWeather, out var inputType))
+            {
+                continue;
+            }
+
             var inputParser = ParserFactory.CreateParser(inputType);
             var weatherPublisher = new WeatherPublisher(inputParser);
-            var configs = ConfigLoader.Load(ConfigFileName);
-            var bots = BotFactory.CreateBots(configs);
             weatherPublisher.SubscribeBots(bots);
-            try
-            {
-                weatherPublisher.ParseInput(inputWeather);
-            }
-            catch (ParsingException ex)
-            {
-                Console.WriteLine($"Parsing failed: {ex.Message}");
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine($"{exception.Message}");
-            }
+
+            TryParseInput(weatherPublisher, inputWeather);
+        }
+    }
+
+    private static string? ReadWeatherInput()
+    {
+        Console.WriteLine("Enter weather data:");
+        var input = Console.ReadLine();
+        return string.IsNullOrWhiteSpace(input) ? null : input;
+    }
+
+    private static bool TryDetectInputType(string inputWeather, out InputType inputType)
+    {
+        try
+        {
+            inputType = InputTypeDetector.Detect(inputWeather);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Input type detection failed: {exception.Message}");
+            inputType = default;
+            return false;
+        }
+    }
+
+    private static void TryParseInput(WeatherPublisher weatherPublisher, string inputWeather)
+    {
+        try
+        {
+            weatherPublisher.ParseInput(inputWeather);
+        }
+        catch (ParsingException exception)
+        {
+            Console.WriteLine($"Parsing failed: {exception.Message}");
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Unexceptionpected error: {exception.Message}");
         }
     }
 }
