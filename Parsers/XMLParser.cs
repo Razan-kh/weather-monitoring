@@ -23,9 +23,9 @@ public class XMLParser : IParsingInput
                 ? weatherData
                 : throw new XmlParsingException("Deserialized object is null or not of type WeatherData.");
         }
-        catch (InvalidOperationException ex)
+        catch (InvalidOperationException exception)
         {
-            throw new XmlParsingException("Failed to parse XML input.", ex);
+            throw new XmlParsingException("Failed to parse XML input.", exception);
         }
     }
 }
