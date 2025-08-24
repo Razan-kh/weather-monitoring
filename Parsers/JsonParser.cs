@@ -12,13 +12,13 @@ public class JsonParser : IParsingInput
             var result = JsonSerializer.Deserialize<WeatherData>(input);
             return result is null ? throw new JsonParsingException("Deserialized object is null.") : result;
         }
-        catch (JsonException ex)
+        catch (JsonException exception)
         {
-            throw new JsonParsingException("Failed to parse JSON input.", ex);
+            throw new JsonParsingException("Failed to parse JSON input.", exception);
         }
-        catch (NotSupportedException ex)
+        catch (NotSupportedException exception)
         {
-            throw new JsonParsingException("The JSON input type is not supported.", ex);
+            throw new JsonParsingException("The JSON input type is not supported.", exception);
         }
     }
 }
