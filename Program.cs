@@ -1,4 +1,4 @@
-﻿namespace WeatherMonitoring.WeatherBots;
+﻿﻿namespace WeatherMonitoring.WeatherBots;
 
 public class Program
 {
