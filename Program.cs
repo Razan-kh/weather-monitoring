@@ -1,6 +1,8 @@
-using WeatherMonitoring.Parsers;
+﻿using WeatherMonitoring.Parsers;
 using WeatherMonitoring.IWeatherBots;
 using WeatherMonitoring.Parsers.Exceptions;
+using WeatherMonitoring.Parsers.Exceptions;
+using WeatherMonitoring.Parsers;
 
 namespace WeatherMonitoring;
 
@@ -12,10 +14,13 @@ public class Program
     {
         var configs = ConfigLoader.Load(ConfigFileName);
         var bots = BotFactory.CreateBots(configs);
-
+        string inputWeather;
+        var weatherPublisher = new WeatherPublisher();
+        weatherPublisher.SubscribeBots(bots);
+        WeatherData weatherData;
         while (true)
         {
-            var inputWeather = ReadWeatherInput();
+            inputWeather = ReadWeatherInput();
             if (inputWeather is null)
             {
                 continue;
@@ -27,10 +32,11 @@ public class Program
             }
 
             var inputParser = ParserFactory.CreateParser(inputType);
-            var weatherPublisher = new WeatherPublisher(inputParser);
-            weatherPublisher.SubscribeBots(bots);
+            weatherData = inputParser.ParseInput(inputWeather);
 
-            TryParseInput(weatherPublisher, inputWeather);
+            TryParseInput(inputWeather, inputParser);
+
+            weatherPublisher.NotifyBots(weatherData);
         }
     }
 
@@ -56,11 +62,11 @@ public class Program
         }
     }
 
-    private static void TryParseInput(WeatherPublisher weatherPublisher, string inputWeather)
+    private static void TryParseInput(string inputWeather, IParsingInput parser)
     {
         try
         {
-            weatherPublisher.ParseInput(inputWeather);
+            parser.ParseInput(inputWeather);
         }
         catch (ParsingException exception)
         {
