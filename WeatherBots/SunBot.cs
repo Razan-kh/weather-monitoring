@@ -1,14 +1,14 @@
-using WeatherMonitoring.IWeatherBots.BotConfigurations;
+using WeatherMonitoring.WeatherBots.BotConfigurations;
 
-namespace WeatherMonitoring.IWeatherBots;
+namespace WeatherMonitoring.WeatherBots;
 
-public class SnowBot : IWeatherBot
+public class SunBot : IWeatherBot
 {
     public string Message { get; init; }
     public bool Enabled { get; init; }
     public double TemperatureThreshold { get; init; }
 
-    public SnowBot(TemperatureConfiguration botConfiguration)
+    public SunBot(TemperatureConfiguration botConfiguration)
     {
         Message = botConfiguration.Message;
         Enabled = botConfiguration.Enabled;
@@ -19,7 +19,7 @@ public class SnowBot : IWeatherBot
 
     public void Notify(WeatherData data)
     {
-        if (data.Temperature < TemperatureThreshold)
+        if (data.Temperature > TemperatureThreshold)
         {
             Activate();
         }

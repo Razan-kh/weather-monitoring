@@ -1,6 +1,6 @@
-using WeatherMonitoring.IWeatherBots.BotConfigurations;
+using WeatherMonitoring.WeatherBots.BotConfigurations;
 
-namespace WeatherMonitoring.IWeatherBots;
+namespace WeatherMonitoring.WeatherBots;
 
 public class RainBot : IWeatherBot
 {
