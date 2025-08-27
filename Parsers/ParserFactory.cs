@@ -2,7 +2,7 @@ namespace WeatherMonitoring.Parsers;
 
 public class ParserFactory
 {
-    public static IParsingInput CreateParser(InputType input)
+    public static IParser CreateParser(InputType input)
     {
         return input switch
         {

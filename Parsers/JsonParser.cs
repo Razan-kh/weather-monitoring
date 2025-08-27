@@ -1,11 +1,12 @@
 using System.Text.Json;
+
 using WeatherMonitoring.Parsers.Exceptions;
 
 namespace WeatherMonitoring.Parsers;
 
-public class JsonParser : IParsingInput
+public class JsonParser : IParser
 {
-    public WeatherData ParseInput(string input)
+    public WeatherData Parse(string input)
     {
         try
         {

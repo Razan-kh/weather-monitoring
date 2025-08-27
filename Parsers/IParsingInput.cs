@@ -1,6 +1,6 @@
 namespace WeatherMonitoring.Parsers;
 
-public interface IParsingInput
+public interface IParser
 {
-    WeatherData ParseInput(string input);
+    WeatherData Parse(string input);
 }
