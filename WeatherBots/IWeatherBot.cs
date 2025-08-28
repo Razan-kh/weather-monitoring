@@ -1,3 +1,5 @@
+using WeatherMonitoring.Models;
+
 namespace WeatherMonitoring.WeatherBots;
 
 public interface IWeatherBot

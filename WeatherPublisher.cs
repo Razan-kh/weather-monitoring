@@ -1,5 +1,6 @@
-using WeatherMonitoring.IWeatherBots;
-using WeatherMonitoring.Parsers;
+
+using WeatherMonitoring.Models;
+using WeatherMonitoring.WeatherBots;
 
 namespace WeatherMonitoring;
 

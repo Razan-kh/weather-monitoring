@@ -1,3 +1,4 @@
+using WeatherMonitoring.Models;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;

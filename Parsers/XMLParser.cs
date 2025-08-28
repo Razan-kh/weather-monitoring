@@ -1,12 +1,14 @@
 using System.Xml;
 using System.Xml.Serialization;
+
+using WeatherMonitoring.Models;
 using WeatherMonitoring.Parsers.Exceptions;
 
 namespace WeatherMonitoring.Parsers;
 
-public class XMLParser : IParsingInput
+public class XMLParser : IParser
 {
-    public WeatherData ParseInput(string input)
+    public WeatherData Parse(string input)
     {
         try
         {

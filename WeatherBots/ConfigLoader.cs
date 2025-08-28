@@ -1,4 +1,6 @@
 using System.Text.Json;
+
+using WeatherMonitoring.Enums;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;

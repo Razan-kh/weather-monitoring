@@ -1,8 +1,9 @@
 ﻿﻿using WeatherMonitoring.Parsers;
-using WeatherMonitoring.IWeatherBots;
 using WeatherMonitoring.Parsers.Exceptions;
 using WeatherMonitoring.Parsers.Exceptions;
 using WeatherMonitoring.Parsers;
+using WeatherMonitoring.WeatherBots;
+using WeatherMonitoring.Models;
 
 namespace WeatherMonitoring;
 
@@ -32,9 +33,9 @@ public class Program
             }
 
             var inputParser = ParserFactory.CreateParser(inputType);
-            weatherData = inputParser.ParseInput(inputWeather);
+            weatherData = inputParser.Parse(inputWeather);
 
-            TryParseInput(inputWeather, inputParser);
+            TryParse(inputWeather, inputParser);
 
             weatherPublisher.NotifyBots(weatherData);
         }
@@ -62,11 +63,11 @@ public class Program
         }
     }
 
-    private static void TryParseInput(string inputWeather, IParsingInput parser)
+    private static void TryParse(string inputWeather, IParser parser)
     {
         try
         {
-            parser.ParseInput(inputWeather);
+            parser.Parse(inputWeather);
         }
         catch (ParsingException exception)
         {
