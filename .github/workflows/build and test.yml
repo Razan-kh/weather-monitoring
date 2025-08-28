@@ -36,12 +36,12 @@ jobs:
 
     - name: Restore dependencies
       shell: bash
-      run: dotnet restore ./TicketBooking.csproj
+      run: dotnet restore ./weather-monitoring.csproj
 
     - name: Build
       shell: bash
-      run: dotnet build ./TicketBooking.csproj --configuration Release --no-restore
+      run: dotnet build ./weather-monitoring.csproj --configuration Release --no-restore
 
     - name: Test
       shell: bash
-      run: dotnet test ./TicketBooking.csproj --no-restore --verbosity normal
+      run: dotnet test ./weather-monitoring.csproj --no-restore --verbosity normal
