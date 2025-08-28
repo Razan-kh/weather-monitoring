@@ -1,3 +1,4 @@
+using WeatherMonitoring.Models;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;
@@ -12,7 +13,7 @@ public class SnowBot : IWeatherBot
     {
         Message = botConfiguration.Message;
         Enabled = botConfiguration.Enabled;
-        TemperatureThreshold = botConfiguration.Treshold;
+        TemperatureThreshold = botConfiguration.TemperatureThreshold;
     }
 
     public void Activate() => Console.WriteLine(Message);

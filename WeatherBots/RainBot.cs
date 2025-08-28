@@ -1,3 +1,4 @@
+using WeatherMonitoring.Models;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;
@@ -8,11 +9,11 @@ public class RainBot : IWeatherBot
     public bool Enabled { get; init; }
     public double HumidityThreshold { get; init; }
 
-    public RainBot(HumidityConfiguration  botConfiguration)
+    public RainBot(HumidityConfiguration botConfiguration)
     {
         Message = botConfiguration.Message;
         Enabled = botConfiguration.Enabled;
-        HumidityThreshold = botConfiguration.Treshold;
+        HumidityThreshold = botConfiguration.HumidityThreshold;
     }
 
     public void Activate() => Console.WriteLine(Message);

@@ -1,5 +1,5 @@
 using System.Text.Json;
-
+using WeatherMonitoring.Models;
 using WeatherMonitoring.Parsers.Exceptions;
 
 namespace WeatherMonitoring.Parsers;

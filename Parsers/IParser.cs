@@ -1,3 +1,5 @@
+using WeatherMonitoring.Models;
+
 namespace WeatherMonitoring.Parsers;
 
 public interface IParser

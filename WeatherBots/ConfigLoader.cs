@@ -1,4 +1,6 @@
 using System.Text.Json;
+
+using WeatherMonitoring.Enums;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;
@@ -16,25 +18,23 @@ public static class ConfigLoader
             property => Enum.TryParse<BotType>(property.Name, ignoreCase: true, out var botType)
                 ? botType
                 : throw new InvalidOperationException($"Unknown bot type in configuration: {property.Name}"),
-            property => DeserializeBot(property)
+            DeserializeBot
         );
     }
 
     private static BotConfiguration DeserializeBot(JsonProperty property)
     {
-        if (property.Name.Equals("RainBot", StringComparison.OrdinalIgnoreCase))
+        if (!Enum.TryParse<BotType>(property.Name, ignoreCase: true, out var botType))
         {
-            return property.Value.Deserialize<HumidityConfiguration>()!;
-        }
-        else if (property.Name.Equals("SunBot", StringComparison.OrdinalIgnoreCase))
-        {
-            return property.Value.Deserialize<TemperatureConfiguration>()!;
-        }
-        else if (property.Name.Equals("SnowBot", StringComparison.OrdinalIgnoreCase))
-        {
-            return property.Value.Deserialize<TemperatureConfiguration>()!;
+            throw new InvalidOperationException($"Unknown bot type: {property.Name}");
         }
 
-        return property.Value.Deserialize<BotConfiguration>()!;
+        return botType switch
+        {
+            BotType.RainBot => property.Value.Deserialize<HumidityConfiguration>()!,
+            BotType.SunBot => property.Value.Deserialize<TemperatureConfiguration>()!,
+            BotType.SnowBot => property.Value.Deserialize<TemperatureConfiguration>()!,
+            _ => property.Value.Deserialize<BotConfiguration>()!
+        };
     }
 }

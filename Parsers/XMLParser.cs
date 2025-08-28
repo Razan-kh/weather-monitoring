@@ -1,6 +1,6 @@
 using System.Xml;
 using System.Xml.Serialization;
-
+using WeatherMonitoring.Models;
 using WeatherMonitoring.Parsers.Exceptions;
 
 namespace WeatherMonitoring.Parsers;

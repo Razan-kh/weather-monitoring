@@ -1,4 +1,4 @@
-namespace WeatherMonitoring.WeatherBots;
+namespace WeatherMonitoring.Enums;
 
 public enum BotType
 {

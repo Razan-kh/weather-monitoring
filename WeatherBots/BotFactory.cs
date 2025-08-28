@@ -1,3 +1,4 @@
+using WeatherMonitoring.Enums;
 using WeatherMonitoring.WeatherBots.BotConfigurations;
 
 namespace WeatherMonitoring.WeatherBots;
