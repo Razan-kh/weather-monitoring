@@ -6,7 +6,7 @@ using WeatherMonitoring.WeatherBots.BotConfigurations;
 public class BotFactoryTests
 {
     [Fact]
-    public void CreateBots_ReturnsOnlyEnabledBots()
+    public void CreateBots_ShouldReturnBots_WhenTheyAreEnabled()
     {
         // Arrange
         var configs = new Dictionary<BotType, BotConfiguration>
