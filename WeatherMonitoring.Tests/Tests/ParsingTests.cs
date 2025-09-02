@@ -13,14 +13,13 @@ public class ParserTests
     {
         // Arrange
         var input = @"{""Location"": ""Nablus"", ""Temperature"": 32, ""Humidity"": 40}";
+        var expected = new HumityBot(...);
+        
         // Act
-        var data = _jsonParser.Parse(input);
+        var result = _jsonParser.Parse(input);
 
         // Assert
-        data.Should().NotBeNull();
-        data!.Location.Should().Be("Nablus");
-        data.Temperature.Should().Be(32);
-        data.Humidity.Should().Be(40);
+        result?.Should().BeEquivalentTo(expected);
     }
 
     [Theory]
