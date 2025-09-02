@@ -19,8 +19,11 @@ public class BotFactoryTests
         var bots = BotFactory.CreateBots(configs);
 
         // Assert
+using (new AssertionScope)
+{
         bots.Should().HaveCount(1);
         bots[0].Should().BeOfType<RainBot>();
+}
     }
 
     [Fact]
