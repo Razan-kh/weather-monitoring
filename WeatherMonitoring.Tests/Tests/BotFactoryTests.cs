@@ -6,7 +6,7 @@ using WeatherMonitoring.WeatherBots.BotConfigurations;
 public class BotFactoryTests
 {
     [Fact]
-    public void CreateBots_ReturnsOnlyEnabledBots()
+    public void CreateBots_ShouldReturnBots_WhenTheyAreEnabled()
     {
         // Arrange
         var configs = new Dictionary<BotType, BotConfiguration>
@@ -19,8 +19,11 @@ public class BotFactoryTests
         var bots = BotFactory.CreateBots(configs);
 
         // Assert
+using (new AssertionScope)
+{
         bots.Should().HaveCount(1);
         bots[0].Should().BeOfType<RainBot>();
+}
     }
 
     [Fact]
