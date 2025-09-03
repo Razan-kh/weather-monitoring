@@ -19,7 +19,7 @@ public class SunBot : IWeatherBot
         _output = output ?? Console.WriteLine;
     }
 
-    public void Activate() => _output(Message);
+    public virtual void Activate() => _output(Message);
 
     public void Notify(WeatherData data)
     {

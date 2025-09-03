@@ -2,6 +2,10 @@ using Xunit;
 using FluentAssertions;
 using WeatherMonitoring.Parsers;
 using WeatherMonitoring.Parsers.Exceptions;
+using WeatherMonitoring.Models;
+using FluentAssertions.Execution;
+
+namespace WeatherMonitoring.Tests.Tests;
 
 public class ParserTests
 {
@@ -13,8 +17,8 @@ public class ParserTests
     {
         // Arrange
         var input = @"{""Location"": ""Nablus"", ""Temperature"": 32, ""Humidity"": 40}";
-        var expected = new HumityBot(...);
-        
+        var expected = new WeatherData { Humidity = 40, Temperature = 32, Location = "Nablus" };
+
         // Act
         var result = _jsonParser.Parse(input);
 
@@ -26,7 +30,7 @@ public class ParserTests
     [InlineData("")]
     [InlineData("not json")]
     [InlineData(@"{ ""Location"": ""Nablus"" }")] // missing fields
-    public void TryParse_InvalidJson_ReturnsFalse(string input)
+    public void TryParse_InvalidJson_ThrowsException(string input)
     {
         // Act
         Action act = () => _jsonParser.Parse(input);
@@ -39,12 +43,14 @@ public class ParserTests
     [Fact]
     public void TryParse_ValidXml_ReturnsTrueAndData()
     {
+        // Arrange
         var input = @"<WeatherData><Location>Nablus</Location><Temperature>32</Temperature><Humidity>40</Humidity></WeatherData>";
+        var expected = new WeatherData { Humidity = 40, Temperature = 32, Location = "Nablus" };
+        
+        // Act
+        var result = _xmlParser.Parse(input);
 
-        var data = _xmlParser.Parse(input);
-
-        data!.Location.Should().Be("Nablus");
-        data.Temperature.Should().Be(32);
-        data.Humidity.Should().Be(40);
+        // Assert
+        result?.Should().BeEquivalentTo(expected);
     }
 }

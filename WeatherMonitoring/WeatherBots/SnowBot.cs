@@ -8,7 +8,7 @@ public class SnowBot : IWeatherBot
     public string Message { get; init; }
     public bool Enabled { get; init; }
     public double TemperatureThreshold { get; init; }
-
+    
     private readonly Action<string> _output;
 
     public SnowBot(TemperatureConfiguration botConfiguration, Action<string>? output = null)

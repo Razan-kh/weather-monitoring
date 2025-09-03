@@ -24,4 +24,6 @@ public class WeatherPublisher
             SubscribeBot(bot);
         }
     }
+    
+    public IReadOnlyCollection<IWeatherBot> GetSubscribedBots() => _bots.AsReadOnly();
 }

@@ -3,6 +3,8 @@ using FluentAssertions;
 using System;
 using WeatherMonitoring.Parsers;
 
+namespace WeatherMonitoring.Tests.Tests;
+
 public class ParserFactoryTests
 {
     [Fact]
@@ -41,7 +43,6 @@ public class ParserFactoryTests
         Action act = () => ParserFactory.CreateParser(unsupportedInput);
 
         // Assert
-        act.Should().Throw<NotSupportedException>()
-           .WithMessage("Unknown parser type");
+        act.Should().Throw<NotSupportedException>().WithMessage("Unknown parser type");
     }
 }
