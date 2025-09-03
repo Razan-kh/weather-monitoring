@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"name": "WeatherMonitoring",
+		"path": "."
+	},
+	{
+		"name": "WeatherMonitoring.Tests",
+		"path": "WeatherMonitoring.Tests"
+	}
+],
+  "settings": {}
+}

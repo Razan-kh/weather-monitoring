@@ -9,14 +9,17 @@ public class SunBot : IWeatherBot
     public bool Enabled { get; init; }
     public double TemperatureThreshold { get; init; }
 
-    public SunBot(TemperatureConfiguration botConfiguration)
+    private readonly Action<string> _output;
+
+    public SunBot(TemperatureConfiguration botConfiguration, Action<string>? output = null)
     {
         Message = botConfiguration.Message;
         Enabled = botConfiguration.Enabled;
         TemperatureThreshold = botConfiguration.TemperatureThreshold;
+        _output = output ?? Console.WriteLine;
     }
 
-    public void Activate() => Console.WriteLine(Message);
+    public virtual void Activate() => _output(Message);
 
     public void Notify(WeatherData data)
     {

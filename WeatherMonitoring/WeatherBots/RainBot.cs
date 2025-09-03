@@ -9,14 +9,17 @@ public class RainBot : IWeatherBot
     public bool Enabled { get; init; }
     public double HumidityThreshold { get; init; }
 
-    public RainBot(HumidityConfiguration botConfiguration)
+    private readonly Action<string> _output;
+
+    public RainBot(HumidityConfiguration botConfiguration, Action<string>? output = null)
     {
         Message = botConfiguration.Message;
         Enabled = botConfiguration.Enabled;
         HumidityThreshold = botConfiguration.HumidityThreshold;
+        _output = output ?? Console.WriteLine;
     }
 
-    public void Activate() => Console.WriteLine(Message);
+    public void Activate() => _output(Message);
 
     public void Notify(WeatherData data)
     {
